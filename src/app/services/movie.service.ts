@@ -26,4 +26,6 @@ export class MovieService {
     return this.http.get<MovieResult>(`${BASE_URL}/movie/${id}?api_key=${API_KEY}`);
 
   }
+
+  //getTopTenMovies()
 }

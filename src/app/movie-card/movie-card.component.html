@@ -1,0 +1,14 @@
+
+  @for (item of movies; track item.id){
+  <ion-card>
+  <img [src]="imageBaseUrl + '/w92' + item.poster_path" alt="poster" />
+  <ion-card-header>
+    <ion-card-title>{{ item.title }}</ion-card-title>
+    <ion-card-subtitle color="tertiary">Science Fiction</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-badge slot="end">{{ item.vote_average }}</ion-badge>
+  </ion-card-content>
+</ion-card>
+  }

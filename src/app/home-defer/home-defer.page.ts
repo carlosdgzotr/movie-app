@@ -5,6 +5,7 @@ import { catchError, finalize } from 'rxjs';
 import { MovieResult } from '../services/interfaces';
 import { DatePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { MovieCardComponent } from '../movie-card/movie-card.component';
 
 @Component({
   selector: 'app-home-defer',
@@ -29,7 +30,8 @@ import { RouterModule } from '@angular/router';
     RouterModule,
     IonBadge,
     IonInfiniteScroll,
-    IonInfiniteScrollContent
+    IonInfiniteScrollContent,
+    MovieCardComponent
   ],
 })
 export class HomeDeferPage {
