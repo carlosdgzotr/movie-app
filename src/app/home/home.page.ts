@@ -62,7 +62,7 @@ export class HomePage {
       catchError((err: any) => {
         console.log(err);
         this.error = err.error.status_message;
-        return [];
+        return []; 
       })
     ).subscribe({
       next: (res) => {
