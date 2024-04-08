@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonCardSubtitle, IonBadge } from '@ionic/angular/standalone';
 import { MovieService } from '../services/movie.service';
 import { MovieResult } from '../services/interfaces';
@@ -18,7 +18,7 @@ import { MovieResult } from '../services/interfaces';
   ]
 
 })
-export class MovieCardComponent  implements OnInit {
+export class MovieCardComponent{
   private movieService = inject(MovieService);
   private currentPage = 1;
   public error = null;
@@ -27,8 +27,10 @@ export class MovieCardComponent  implements OnInit {
   public imageBaseUrl = 'https://image.tmdb.org/t/p';
   public dummyArray = new Array(5);
 
+  @Input()
+  
+
   constructor() { }
 
-  ngOnInit() {}
 
 }
