@@ -1,5 +1,5 @@
-import { Component, Input, inject } from '@angular/core';
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonCardSubtitle, IonBadge } from '@ionic/angular/standalone';
+import { Component, Input, inject, WritableSignal, signal, OnInit } from '@angular/core';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonCardSubtitle, IonBadge, IonList } from '@ionic/angular/standalone';
 import { MovieService } from '../services/movie.service';
 import { MovieResult } from '../services/interfaces';
 
@@ -14,7 +14,8 @@ import { MovieResult } from '../services/interfaces';
   IonCardTitle,
   IonCardContent,
   IonCardSubtitle,
-  IonBadge
+  IonBadge,
+  IonList
   ]
 
 })
@@ -26,11 +27,26 @@ export class MovieCardComponent{
   public movies: MovieResult[] = [];
   public imageBaseUrl = 'https://image.tmdb.org/t/p';
   public dummyArray = new Array(5);
+  
+  public movie: WritableSignal<MovieResult | null> = signal(null);
+  
 
-  @Input()
+  @Input() item!: MovieResult;
   
 
   constructor() { }
+
+  OnInit() {
+    
+  }
+
+  setId(movieId: string) {
+    this.movieService.getMovieDetails(movieId).subscribe((movie) => {
+      console.log(movie);
+      
+      this.movie.set(movie);
+    });
+  }
 
 
 }

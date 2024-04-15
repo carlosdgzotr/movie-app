@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, InfiniteScrollCustomEvent, IonList, IonItem, IonAvatar, IonSkeletonText, IonAlert, IonLabel, IonBadge, IonInfiniteScroll, IonInfiniteScrollContent } from '@ionic/angular/standalone';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit, inject } from '@angular/core';
+import { IonHeader, IonToolbar, IonTitle, IonContent, InfiniteScrollCustomEvent, IonList, IonItem, IonAvatar, IonSkeletonText, IonAlert, IonLabel, IonBadge, IonInfiniteScroll, IonInfiniteScrollContent, IonicSlides } from '@ionic/angular/standalone';
 import { MovieService } from '../services/movie.service';
 import { catchError, finalize } from 'rxjs';
 import { MovieResult } from '../services/interfaces';
@@ -33,6 +33,7 @@ import { MovieCardComponent } from '../movie-card/movie-card.component';
     IonInfiniteScrollContent,
     MovieCardComponent
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomeDeferPage {
   private movieService = inject(MovieService);
@@ -43,23 +44,25 @@ export class HomeDeferPage {
   public imageBaseUrl = 'https://image.tmdb.org/t/p';
   public dummyArray = new Array(5);
 
+  swiperModules = [IonicSlides];
+
   constructor() {
     this.loadMovies();
   }
 
-  loadMovies(event?: InfiniteScrollCustomEvent) {
+  loadMovies(){/*event?: InfiniteScrollCustomEvent) {*/
     this.error = null;
 
-    if(!event){
+    /*if(!event){
       this.isLoading = true;
-    }
+    }*/
 
     this.movieService.getTopRatedMovies(this.currentPage).pipe(
       finalize(() => {
         this.isLoading = false;
-        if(event){
+        /*if(event){
           event.target.complete();
-        }
+        }*/
       }),
       catchError((err: any) => {
         console.log(err);
@@ -71,15 +74,16 @@ export class HomeDeferPage {
         console.log(res);
         
         this.movies.push(...res.results);
-        if (event) {
+        /*if (event) {
           event.target.disabled = res.total_pages === this.currentPage;
-        }
+        }*/
       }
     });
   }
 
-  loadMore(event: InfiniteScrollCustomEvent){
+
+  /*loadMore(event: InfiniteScrollCustomEvent){
     this.currentPage++;
     this.loadMovies(event);
-  }
+  }*/
 }
